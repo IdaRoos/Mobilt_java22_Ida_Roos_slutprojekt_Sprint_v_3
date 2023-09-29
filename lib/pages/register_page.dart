@@ -64,64 +64,64 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: Colors.green[800],
                 ),
               ),
-                  const SizedBox(height: 25),
+              const SizedBox(height: 25),
 
 // create account message
-                  const Text(
-                    'Let\'s create an account for you',
-                    style: TextStyle(
-                      fontSize: 16,
+              const Text(
+                'Let\'s create an account for you',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              MyTextField(
+                controller: emailController,
+                hintText: 'Email',
+                obscureText: false,
+              ),
+
+              const SizedBox(height: 10),
+
+              MyTextField(
+                controller: passwordController,
+                hintText: 'Password',
+                obscureText: true,
+              ),
+
+              MyTextField(
+                controller: confirmPasswordController,
+                hintText: 'Confirm password',
+                obscureText: true,
+              ),
+
+              const SizedBox(height: 25),
+
+              // sign up button
+              MyButton(onTap: signUp, text: "Create Account"),
+
+              const SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Are you a member?'),
+                  const SizedBox(width: 4),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: const Text(
+                      'Log in now',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  MyTextField(
-                    controller: emailController,
-                    hintText: 'Email',
-                    obscureText: false,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  MyTextField(
-                    controller: passwordController,
-                    hintText: 'Password',
-                    obscureText: true,
-                  ),
-
-                  MyTextField(
-                    controller: confirmPasswordController,
-                    hintText: 'Confirm password',
-                    obscureText: true,
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  // sign up button
-                  MyButton(onTap: signUp, text: "Create Account"),
-
-                  const SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Are you a member?'),
-                      const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: widget.onTap,
-                        child: const Text(
-                          'Log in now',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    ],
                   )
                 ],
-              ),
-            ),
+              )
+            ],
           ),
-        );
+        ),
+      ),
+    );
   }
 }

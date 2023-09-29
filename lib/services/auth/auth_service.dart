@@ -10,44 +10,47 @@ class AuthService extends ChangeNotifier {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   // sign user in
-Future<UserCredential> signInWithEmailAndPassword(String email, String password) async {
-  try {
-    // sign in
-    UserCredential userCredential =
-    await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+  Future<UserCredential> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      // sign in
+      UserCredential userCredential =
+          await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-    return userCredential;
+      return userCredential;
+    }
+    // catch any errors
+    on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    }
   }
-  // catch any errors
-  on FirebaseAuthException catch (e) {
-    throw Exception(e.code);
-  }
-}
 
 // create a new user
-  Future<UserCredential> signUpWithEmailAndPassword(String email, password) async {
-     try {
-      UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
+  Future<UserCredential> signUpWithEmailAndPassword(
+      String email, password) async {
+    try {
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
       );
       // after creating the user, create a new document for the user in the users collection
       _fireStore.collection('users').doc(userCredential.user!.uid).set({
-        'uid' : userCredential.user!.uid,
+        'uid': userCredential.user!.uid,
         'email': email,
       });
 
       return userCredential;
-     } on FirebaseAuthException catch (e) {
-             throw Exception(e.code);
-     }
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    }
   }
 
 // sign user out
-Future<void> signOut() async {
-  return await FirebaseAuth.instance.signOut();
-}
+  Future<void> signOut() async {
+    return await FirebaseAuth.instance.signOut();
+  }
 }
